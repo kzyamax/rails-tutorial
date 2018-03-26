@@ -1,0 +1,22 @@
+HOSTNAME = "rails-tutorial"
+Vagrant.configure("2") do |config|
+    config.vm.box = "bento/centos-6"
+    config.vm.network "private_network", id: "default-network", type: "dhcp", ip: "192.168.33.0"
+
+    config.vm.provision :shell, :inline => <<-EOT
+
+        #
+        # iptables
+        #
+        service iptables stop
+        chkconfig iptables off
+
+        #
+        # nginx
+        #
+        rpm -ivh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+        yum install -y nginx
+
+
+    EOT
+end
