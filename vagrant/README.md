@@ -6,3 +6,4 @@
 
 ## Application
 * nginx (newest)
+* rbenv
