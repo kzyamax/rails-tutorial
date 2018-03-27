@@ -7,3 +7,4 @@
 ## Application
 * nginx (newest)
 * rbenv
+* ruby (2.4.3)
