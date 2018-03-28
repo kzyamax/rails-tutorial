@@ -1,4 +1,4 @@
-# rails-tutorial
+# Rails-tutorial
 
 ## Environment
 * CentOS (newest)
@@ -6,3 +6,10 @@
 * rbenv
 * Ruby (2.4.3)
 * RubyOnRails (5.1.4)
+
+## Usage
+
+```
+$ cd vagrant
+$ vagrant up
+```
