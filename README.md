@@ -2,4 +2,6 @@
 
 ## Environment
 * CentOS (newest)
-* nginx (newest)
+* Nginx (newest)
+* rbenv
+* ruby (2.4.3)
