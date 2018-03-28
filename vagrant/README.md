@@ -5,6 +5,7 @@
 `bento/centos-6`
 
 ## Application
-* nginx (newest)
+* Nginx (newest)
 * rbenv
-* ruby (2.4.3)
+* Ruby (2.4.3)
+* RubyOnRails (5.1.4)
