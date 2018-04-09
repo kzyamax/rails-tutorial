@@ -1,5 +1,6 @@
 HOSTNAME = "rails-tutorial"
-APPLICATION = "hello_app"
+# APPLICATION = "hello_app"
+APPLICATION = "toy_app"
 
 Vagrant.configure("2") do |config|
     config.vm.box = "bento/centos-6"
@@ -50,6 +51,7 @@ Vagrant.configure("2") do |config|
         cp /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.org
         cp /vagrant/conf/nginx/nginx.conf /etc/nginx/nginx.conf
         cp /vagrant/conf/nginx/hello_app.conf /etc/nginx/conf.d/hello_app.conf
+        cp /vagrant/conf/nginx/toy_app.conf /etc/nginx/conf.d/toy_app.conf
 
         #
         # rbenv
@@ -78,9 +80,31 @@ Vagrant.configure("2") do |config|
         gem install rails -v 5.1.4
         cd /var/www/hello_app
         bundle install
+        cd /var/www/toy_app
+        bundle install
     EOT
 
-    config.vm.provision :shell, run: "always", inline: <<-EOT        
+    if APPLICATION == "hello_app"
+        config.vm.provision :shell, run: "always", inline: <<-EOT
+            #
+            # change config
+            #
+            find /etc/nginx/conf.d/hello_app.conf.org -type f -exec mv {} /etc/nginx/conf.d/hello_app.conf \\;
+            find /etc/nginx/conf.d/toy_app.conf -type f -exec mv {} /etc/nginx/conf.d/toy_app.conf.org \\;
+        EOT
+    end
+
+    if APPLICATION == "toy_app"
+        config.vm.provision :shell, run: "always", inline: <<-EOT
+            #
+            # change config
+            #
+            find /etc/nginx/conf.d/toy_app.conf.org -type f -exec mv {} /etc/nginx/conf.d/toy_app.conf \\;
+            find /etc/nginx/conf.d/hello_app.conf -type f -exec mv {} /etc/nginx/conf.d/hello_app.conf.org \\;
+        EOT
+    end
+
+    config.vm.provision :shell, run: "always", inline: <<-EOT
         #
         # start server
         #
